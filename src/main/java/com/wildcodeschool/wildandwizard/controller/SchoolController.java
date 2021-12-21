@@ -9,29 +9,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class SchoolController {
 
-    private SchoolRepository repository = new SchoolRepository();
+	private SchoolRepository repository = new SchoolRepository();
 
-    @GetMapping("/schools")
-    public String getAll(Model model) {
+	@GetMapping("/schools")
+	public String getAll(Model model) {
 
-        model.addAttribute("schools", repository.findAll());
+		model.addAttribute("schools", repository.findAll());
 
-        return "school_get_all";
-    }
+		return "school_get_all";
+	}
 
-    @GetMapping("/school")
-    public String getById(Model model, @RequestParam Long id) {
+	@GetMapping("/school")
+	public String getById(Model model, @RequestParam Long id) {
 
-        model.addAttribute("school", repository.findById(id));
+		model.addAttribute("school", repository.findById(id));
 
-        return "school_get";
-    }
+		return "school_get";
+	}
 
-    @GetMapping("/schools/search")
-    public String getByCountry(Model model, @RequestParam String country) {
+	@GetMapping("/schools/search")
+	public String getByCountry(Model model, @RequestParam(required = false, defaultValue = "%") String country) {
 
-        model.addAttribute("schools", repository.findByCountry(country));
+		model.addAttribute("schools", repository.findByCountry(country));
 
-        return "school_get_all";
-    }
+		return "school_get_all";
+	}
 }
